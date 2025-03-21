@@ -7,7 +7,7 @@ import requests
 import os
 
 # Google Drive file ID (replace with your actual file ID)
-GOOGLE_DRIVE_FILE_ID = "1aBcDeFgHiJkLmN"
+GOOGLE_DRIVE_FILE_ID = "179vJk6tbet0dUatx61Qniu_70zPjbSmY"
 MODEL_FILE = "clf.pkl"
 
 # Function to download file from Google Drive
