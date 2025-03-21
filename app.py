@@ -6,27 +6,6 @@ import re
 import requests
 import os
 
-# Google Drive file ID (replace with your actual file ID)
-GOOGLE_DRIVE_FILE_ID = "179vJk6tbet0dUatx61Qniu_70zPjbSmY"
-MODEL_FILE = "clf.pkl"
-
-# Function to download file from Google Drive
-def download_from_google_drive(file_id, output_path):
-    url = f"https://drive.google.com/uc?export=download&id=179vJk6tbet0dUatx61Qniu_70zPjbSmY"
-    response = requests.get(url, stream=True)
-    if response.status_code == 200:
-        with open(output_path, "wb") as f:
-            for chunk in response.iter_content(1024):
-                f.write(chunk)
-        print(f"Downloaded {output_path} from Google Drive.")
-    else:
-        print("Error downloading file from Google Drive.")
-
-# Download the model file if it doesn't exist
-if not os.path.exists(MODEL_FILE):
-    st.write("Downloading model file... ⏳")
-    download_from_google_drive(GOOGLE_DRIVE_FILE_ID, MODEL_FILE)
-    st.write("Model file downloaded successfully ✅")
 
 # Load pre-trained model and vectorizer
 svc_model = pickle.load(open('clf.pkl', 'rb'))
