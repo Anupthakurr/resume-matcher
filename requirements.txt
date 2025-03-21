@@ -28,7 +28,6 @@ pyarrow==19.0.1
 pydeck==0.9.1
 PyPDF2==3.0.1
 PySocks==1.7.1
-python-3.9.9
 python-dateutil==2.9.0.post0
 python-docx==1.1.2
 pytz==2025.1
