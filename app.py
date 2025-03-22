@@ -9,20 +9,35 @@ import os
 import gdown
 
 
-# Ensure the models directory exists
-MODEL_PATH = 'clf.pkl'
-MODEL_URL = "https://drive.google.com/uc?export=download&id=179vJk6tbet0dUatx61Qniu_70zPjbSmY"
+# Dictionary of files and their corresponding Google Drive file IDs
+file_ids = {
+    "clf.pkl": "179vJk6tbet0dUatx61Qniu_70zPjbSmY",
+    "tfidf.pkl": "1UkUzMg9Ir6gKfYVsXGaHDclyk05PZ6DG",
+    "encoder.pkl": "1yBxsmR0Tucced3BFEAL5_XbG47hDrfw0"
+}
 
-# Download model only if it doesn't exist
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model... This will happen only once.")
-    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
-else:
-    print("Model already exists. Skipping download.")
-    
-svc_model = pickle.load(open('clf.pkl', 'rb'))
-tfidf = pickle.load(open('tfidf.pkl', 'rb'))
-le = pickle.load(open('encoder.pkl', 'rb'))
+# Function to download a file from Google Drive
+def download_file(file_name, file_id):
+    if not os.path.exists(file_name):  # Avoid re-downloading
+        print(f"Downloading {file_name}...")
+        url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        gdown.download(url, file_name, quiet=False)
+    else:
+        print(f"{file_name} already exists. Skipping download.")
+
+# Download all required files
+for file_name, file_id in file_ids.items():
+    download_file(file_name, file_id)
+
+# Load models after ensuring they exist
+try:
+    svc_model = pickle.load(open("clf.pkl", "rb"))
+    tfidf = pickle.load(open("tfidf.pkl", "rb"))
+    le = pickle.load(open("encoder.pkl", "rb"))
+    print("Models loaded successfully!")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+    print("Ensure all required model files are correctly downloaded.")
 
 # Function to clean resume text
 def cleanResume(txt):
