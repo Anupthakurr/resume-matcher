@@ -7,10 +7,17 @@ import requests
 import zipfile
 import os
 
-# Unzip the model files if not already extracted
-if not os.path.exists("clf.pkl"):
-    with zipfile.ZipFile("model_files.zip", "r") as zip_ref:
-        zip_ref.extractall()
+# Ensure the models directory exists
+MODEL_PATH = 'clf.pkl'
+MODEL_URL = "https://drive.google.com/uc?export=download&id=179vJk6tbet0dUatx61Qniu_70zPjbSmY"
+
+# Download model only if it doesn't exist
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model... This will happen only once.")
+    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+else:
+    print("Model already exists. Skipping download.")
+    
 svc_model = pickle.load(open('clf.pkl', 'rb'))
 tfidf = pickle.load(open('tfidf.pkl', 'rb'))
 le = pickle.load(open('encoder.pkl', 'rb'))
