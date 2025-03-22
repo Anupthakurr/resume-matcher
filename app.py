@@ -6,6 +6,8 @@ import re
 import requests
 import zipfile
 import os
+import gdown
+
 
 # Ensure the models directory exists
 MODEL_PATH = 'clf.pkl'
