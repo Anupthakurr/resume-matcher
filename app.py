@@ -32,10 +32,6 @@ for file_name, file_id in file_ids.items():
 # Load models after ensuring they exist
 try:
     svc_model = pickle.load(open("clf.pkl", "rb"))
-    with open("tfidf.pkl", "rb") as f:
-    first_bytes = f.read(20)
-    print("First 20 bytes of tfidf.pkl:", first_bytes)
-
     tfidf = pickle.load(open("tfidf.pkl", "rb"))
     le = pickle.load(open("encoder.pkl", "rb"))
     print("Models loaded successfully!")
